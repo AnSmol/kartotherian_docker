@@ -5,14 +5,18 @@ services:
     image: openmaptiles/postgis
     volumes:
       - "pgdata:/var/lib/postgresql/data"
+        #      - ./custom_configs/postgresql.conf:/etc/postgresql.conf
+        #    command: postgres -c 'config_file=/etc/postgresql.conf'
     environment:
      - POSTGRES_DB=gis
      - POSTGRES_USER=gis
+    restart: unless-stopped
 
   cassandra:
     image: cassandra:latest
     volumes:
      - "cassandra_data:/var/lib/cassandra"
+    restart: unless-stopped
 
   tilerator:
     build: ./tilerator
@@ -33,12 +37,14 @@ services:
       - cassandra
       - postgres
       - redis
+    restart: unless-stopped
 
   redis:
     image: redis:latest
     command: redis-server --appendonly yes # to enable persistence
     volumes:
       - "redisdata:/data"
+    restart: unless-stopped
 
   load_db:
     build: ./load_db

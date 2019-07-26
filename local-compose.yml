@@ -5,10 +5,13 @@ services:
   tilerator:
     ports:
       - "16534:80"
+    restart: unless-stopped
 
   kartotherian:
     ports:
       - "6533:6533"
+    restart: unless-stopped
+
 
   erdapfel:
     image: qwantresearch/erdapfel
@@ -17,10 +20,16 @@ services:
       - TILEVIEW_PORT=3000
       - TILEVIEW_system_baseUrl=/
       - TILEVIEW_store_name=local_store
-      - TILEVIEW_mapStyle_baseMapUrl=["http://localhost:6533/ozbasemap/{z}/{x}/{y}.pbf"]
-      - TILEVIEW_mapStyle_poiMapUrl=["http://localhost:6533/ozpoi/{z}/{x}/{y}.pbf"]
+      - TILEVIEW_mapStyle_baseMapUrl=["http://lab-map-02:6533/ozbasemap/{z}/{x}/{y}.pbf"]
+      - TILEVIEW_mapStyle_poiMapUrl=["http://lab-map-02:6533/ozpoi/{z}/{x}/{y}.pbf"]
     ports:
       - "8585:3000"
+    restart: unless-stopped
+
+  telegraf:
+    ports:
+       - "9273:9273"
+    restart: unless-stopped
 
 volumes:
   input_data:
