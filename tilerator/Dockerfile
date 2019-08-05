@@ -21,7 +21,7 @@ RUN git clone https://github.com/QwantResearch/tilerator.git /opt/tilerator \
     && git checkout 64b69c064aae15d474bd61da2c6bc35140f118f8 \
     && npm install --production
 
-RUN git clone https://github.com/QwantResearch/kartotherian_config.git /opt/kartotherian_config \
+RUN git clone https://github.com/AnSmol/kartotherian_config.git /opt/kartotherian_config \
     && cd /opt/kartotherian_config \
     && git checkout 90ebdbbd2af5022cf6974456009f71b6d3a85bd5
 
